@@ -18,6 +18,9 @@ public class Calculator {
 	}
 
 	private static String[] splitNumbers(String numbers){
+		String character1 = ",";
+		String character2 = "\n";
+		numbers = numbers.replaceAll(character2, character1);
 	    return numbers.split(",");
 	}
       
