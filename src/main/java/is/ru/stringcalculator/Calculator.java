@@ -6,11 +6,12 @@ public class Calculator {
 		if(text.equals("")){
 			return 0;
 		}
-		
+
 		else if (text.contains("//")){
 			String delimiter = Character.toString(text.charAt(2));
 			return sum(splitNumbers(text.substring(4), delimiter));
 		}
+		
 		else if (text.contains(",")){
 			return sum(splitNumbers(text, ","));
 		}
@@ -32,8 +33,18 @@ public class Calculator {
       
     private static int sum(String[] numbers){
  	    int total = 0;
+		String negNumbers = "";
+		
         for(String number : numbers){
-		    total += toInt(number);
+			if(toInt(number) < 0){
+				negNumbers += number;
+			}
+			if(toInt(number) < 1000){
+				total += toInt(number);
+			}
+		}
+		if (negNumbers != ""){
+			throw new IllegalArgumentException("Negatives not allowed: " + negNumbers);
 		}
 		return total;
     }
