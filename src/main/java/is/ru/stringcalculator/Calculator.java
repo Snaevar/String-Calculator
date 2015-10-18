@@ -6,8 +6,13 @@ public class Calculator {
 		if(text.equals("")){
 			return 0;
 		}
-		else if(text.contains(",")){
-			return sum(splitNumbers(text));
+		
+		else if (text.contains("//")){
+			String delimiter = Character.toString(text.charAt(2));
+			return sum(splitNumbers(text.substring(4), delimiter));
+		}
+		else if (text.contains(",")){
+			return sum(splitNumbers(text, ","));
 		}
 		else
 			return 1;
@@ -17,10 +22,11 @@ public class Calculator {
 		return Integer.parseInt(number);
 	}
 
-	private static String[] splitNumbers(String numbers){
-		String character1 = ",";
-		String character2 = "\n";
-		numbers = numbers.replaceAll(character2, character1);
+	private static String[] splitNumbers(String numbers, String delimiter){
+		String comma = ",";
+		String newline = "\n";
+		numbers = numbers.replaceAll(delimiter, comma);
+		numbers = numbers.replaceAll(newline, comma);
 	    return numbers.split(",");
 	}
       
